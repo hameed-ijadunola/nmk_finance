@@ -1,0 +1,121 @@
+{% load humanize finance_extras %}
+
+<!-- Category Summary -->
+{% if by_category %}
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+    <h2 class="text-lg font-semibold text-slate-800 mb-4">By Expense Category</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for item in by_category %}
+        <div class="flex items-center justify-between rounded-lg p-3
+            {% if user.is_staff and not item.category__show_on_dashboard %}bg-slate-100 opacity-60
+            {% elif user.is_staff and not item.category__include_in_total %}bg-red-50 opacity-60
+            {% else %}bg-red-50{% endif %}">
+            <div class="flex items-center gap-1.5">
+                <span class="text-sm font-medium text-slate-700">{{ item.category__name }}</span>
+                {% if user.is_staff %}
+                {% if not item.category__show_on_dashboard %}
+                <span class="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full">🚫</span>
+                {% endif %}
+                {% if not item.category__include_in_total %}
+                <span class="text-xs bg-red-100 text-red-600 px-1.5 py-0.5 rounded-full">∅</span>
+                {% endif %}
+                {% endif %}
+            </div>
+            <span class="text-sm font-bold text-red-700">{{ item.total|usd }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Fund Source Summary -->
+{% if by_fund_source %}
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+    <h2 class="text-lg font-semibold text-slate-800 mb-4">By Fund Source</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {% for item in by_fund_source %}
+        <div class="flex items-center justify-between bg-sky-50 rounded-lg p-3">
+            <span class="text-sm font-medium text-slate-700">{{ item.contribution_category__name }}</span>
+            <span class="text-sm font-bold text-sky-700">{{ item.total|usd }}</span>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- Expenses Table -->
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    {% if expenses %}
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead class="bg-slate-50 border-b border-slate-200">
+                <tr>
+                    <th class="text-left py-3 px-4 text-slate-600 font-semibold">Date</th>
+                    <th class="text-left py-3 px-4 text-slate-600 font-semibold">Category</th>
+                    <th class="text-left py-3 px-4 text-slate-600 font-semibold">Fund Source</th>
+                    <th class="text-left py-3 px-4 text-slate-600 font-semibold">Purpose</th>
+                    <th class="text-right py-3 px-4 text-slate-600 font-semibold">Amount</th>
+                    {% if user.is_staff %}
+                    <th class="text-left py-3 px-4 text-slate-600 font-semibold">Flags</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                {% for e in expenses %}
+                <tr class="hover:bg-slate-50 transition
+                    {% if user.is_staff and not e.category.show_on_dashboard %}opacity-50 bg-slate-50
+                    {% elif not e.category.include_in_total %}opacity-60{% endif %}">
+                    <td class="py-3 px-4 text-slate-500">{{ e.date|date:"M d, Y H:i" }}</td>
+                    <td class="py-3 px-4">
+                        <span
+                            class="inline-block bg-red-100 text-red-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                            {{ e.category.name }}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4">
+                        {% if e.contribution_category %}
+                        <span
+                            class="inline-block bg-sky-100 text-sky-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                            {{ e.contribution_category.name }}
+                        </span>
+                        {% else %}
+                        <span class="text-slate-400 text-xs">—</span>
+                        {% endif %}
+                    </td>
+                    <td class="py-3 px-4 text-slate-600">{{ e.purpose|truncatewords:12 }}</td>
+                    <td class="py-3 px-4 text-right font-semibold text-red-600">{{ e.amount|usd }}</td>
+                    {% if user.is_staff %}
+                    <td class="py-3 px-4">
+                        <div class="flex flex-wrap gap-1">
+                            {% if not e.category.show_on_dashboard %}
+                            <span
+                                class="inline-block bg-amber-100 text-amber-700 text-xs font-medium px-2 py-0.5 rounded-full"
+                                title="Category hidden from dashboard">
+                                🚫 Dashboard
+                            </span>
+                            {% endif %}
+                            {% if not e.category.include_in_total %}
+                            <span
+                                class="inline-block bg-red-100 text-red-600 text-xs font-medium px-2 py-0.5 rounded-full"
+                                title="Category excluded from total">
+                                ∅ Total
+                            </span>
+                            {% endif %}
+                        </div>
+                    </td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <div class="p-8 text-center text-slate-400">
+        <svg class="w-12 h-12 mx-auto mb-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+        <p>No expenses found for the selected period.</p>
+    </div>
+    {% endif %}
+</div>

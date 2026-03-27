@@ -1,0 +1,32 @@
+/* NMK Community Finance — Custom Overrides */
+/* Tailwind CDN handles most styling. This file is for minor tweaks. */
+
+/* Smooth scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* HTMX loading indicator */
+.htmx-request .htmx-indicator {
+    display: inline-block;
+}
+
+.htmx-indicator {
+    display: none;
+}
+
+/* Table row hover transition */
+tbody tr {
+    transition: background-color 0.15s ease;
+}
+
+/* Print-friendly: hide nav and footer */
+@media print {
+    nav, footer, form {
+        display: none !important;
+    }
+    main {
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+}

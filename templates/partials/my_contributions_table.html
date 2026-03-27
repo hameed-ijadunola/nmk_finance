@@ -1,0 +1,48 @@
+{% load humanize finance_extras %}
+
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
+    {% if contributions %}
+    <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+            <thead class="bg-slate-50 border-b border-slate-200">
+                <tr>
+                    <th class="text-left py-3 px-4 text-slate-600 font-semibold">Date</th>
+                    <th class="text-left py-3 px-4 text-slate-600 font-semibold">Category</th>
+                    <th class="text-right py-3 px-4 text-slate-600 font-semibold">Amount</th>
+                    <th class="text-left py-3 px-4 text-slate-600 font-semibold">Notes</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+                {% for c in contributions %}
+                <tr class="hover:bg-slate-50 transition">
+                    <td class="py-3 px-4 text-slate-500">{{ c.date|date:"M d, Y H:i" }}</td>
+                    <td class="py-3 px-4">
+                        <span
+                            class="inline-block bg-emerald-100 text-emerald-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                            {{ c.category.name }}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-right font-semibold text-emerald-600">{{ c.amount|usd }}</td>
+                    <td class="py-3 px-4 text-slate-500">{{ c.notes|default:"—" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot class="bg-slate-50 border-t border-slate-200">
+                <tr>
+                    <td colspan="2" class="py-3 px-4 font-semibold text-slate-700">Total</td>
+                    <td class="py-3 px-4 text-right font-bold text-emerald-700">{{ grand_total|usd }}</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    {% else %}
+    <div class="p-8 text-center text-slate-400">
+        <svg class="w-12 h-12 mx-auto mb-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+                d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+        </svg>
+        <p>No contributions found for the selected period.</p>
+    </div>
+    {% endif %}
+</div>

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load humanize finance_extras %}
+
+{% block title %}Expenses{% endblock %}
+
+{% block content %}
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6">
+    <h1 class="text-2xl font-bold text-slate-800">Expenses</h1>
+    {% if user.is_staff or dash_settings.show_recent_expenses %}
+    <p class="text-lg font-semibold text-red-600 mt-2 sm:mt-0">
+        Total: {{ grand_total|usd }}
+    </p>
+    {% endif %}
+</div>
+
+{% if user.is_staff or dash_settings.show_recent_expenses %}
+
+{% if user.is_staff and not dash_settings.show_recent_expenses %}
+<div
+    class="flex items-center gap-2 text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-xl px-4 py-3 mb-5">
+    <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 4.411m0 0L21 21" />
+    </svg>
+    <span>This page is <strong>hidden from general users</strong> (visible to staff only).</span>
+</div>
+{% endif %}
+
+<!-- Date Filter -->
+<form hx-get="{% url 'finance:htmx_expenses_table' %}" hx-target="#expenses-content" hx-swap="innerHTML"
+    class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
+    <div class="flex flex-col sm:flex-row items-end gap-4">
+        <div class="flex-1">
+            <label for="date-from" class="block text-sm font-medium text-slate-600 mb-1">From</label>
+            <input type="date" id="date-from" name="from" value="{{ date_from }}"
+                class="w-full rounded-lg border-slate-300 shadow-sm focus:border-brand-500 focus:ring-brand-500 text-sm px-3 py-2 border">
+        </div>
+        <div class="flex-1">
+            <label for="date-to" class="block text-sm font-medium text-slate-600 mb-1">To</label>
+            <input type="date" id="date-to" name="to" value="{{ date_to }}"
+                class="w-full rounded-lg border-slate-300 shadow-sm focus:border-brand-500 focus:ring-brand-500 text-sm px-3 py-2 border">
+        </div>
+        <button type="submit"
+            class="bg-brand-600 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-brand-700 transition">
+            Filter
+        </button>
+        <a href="{% url 'finance:expenses' %}"
+            class="text-slate-500 hover:text-slate-700 px-4 py-2 rounded-lg text-sm font-medium border border-slate-300 hover:bg-slate-50 transition">
+            Clear
+        </a>
+    </div>
+</form>
+
+<div id="expenses-content">
+    {% include "partials/expenses_table.html" %}
+</div>
+
+{% else %}
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-12 text-center">
+    <svg class="w-12 h-12 mx-auto mb-3 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
+            d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" />
+    </svg>
+    <p class="text-slate-500 font-bold">Unauthorized Access</p>
+    <p class="text-slate-500 font-medium">This section is not currently available.</p>
+</div>
+{% endif %}
+{% endblock %}

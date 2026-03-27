@@ -1,0 +1,39 @@
+# ──────────────────────────────────────────────
+# NMK Community Finance — Docker Compose
+# ──────────────────────────────────────────────
+services:
+  app:
+    build: .
+    container_name: nmk-finance-app
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - sqlite-data:/app/data
+      - media-data:/app/media
+    environment:
+      - DATABASE_PATH=/app/data/db.sqlite3
+    expose:
+      - "8000"
+    depends_on: []
+
+  nginx:
+    image: nginx:alpine
+    container_name: nmk-finance-nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+      - static-data:/app/staticfiles:ro
+      - media-data:/app/media:ro
+    depends_on:
+      - app
+
+volumes:
+  sqlite-data:
+    driver: local
+  media-data:
+    driver: local
+  static-data:
+    driver: local

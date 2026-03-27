@@ -1,1 +1,141 @@
-# nmk_finance
+# NMK Community Finance
+
+A lean, self-hosted financial tracker for a community masjid — tracking contributions (income) and expenses with full categorization, member profiles, and a clean dashboard.
+
+**Stack:** Django 5 · Tailwind CSS (CDN) · HTMX · SQLite · Docker · Nginx
+
+---
+
+## Quick Start (Local Development)
+
+### 1. Clone & create virtual environment
+
+```bash
+git clone <repo-url> nmk_finance
+cd nmk_finance
+python -m venv venv
+# Windows
+venv\Scripts\activate
+# Linux/Mac
+source venv/bin/activate
+```
+
+### 2. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Configure environment
+
+```bash
+cp .env.example .env
+# Edit .env and set a real SECRET_KEY for production
+```
+
+### 4. Run migrations
+
+```bash
+python manage.py migrate
+```
+
+### 5. Create a superuser (treasurer account)
+
+```bash
+python manage.py createsuperuser
+```
+
+### 6. (Optional) Load sample data
+
+```bash
+python manage.py seed_data
+```
+
+This creates sample categories, members, contributions, and expenses.
+Test member login: `testmember` / `testpass123`
+
+### 7. Run the development server
+
+```bash
+python manage.py runserver
+```
+
+Visit:
+- **Dashboard:** http://127.0.0.1:8000/
+- **Admin (Treasurer):** http://127.0.0.1:8000/admin/
+- **Member Login:** http://127.0.0.1:8000/accounts/login/
+
+---
+
+## Production Deployment (Docker)
+
+### Build and run
+
+```bash
+docker compose up --build -d
+```
+
+The app will be available on port **80** via Nginx.
+
+### Cloudflare Tunnel (optional)
+
+Install `cloudflared` on the host machine and create a tunnel:
+
+```bash
+cloudflared tunnel create nmk-finance
+cloudflared tunnel route dns nmk-finance finance.yourdomain.com
+cloudflared tunnel run --url http://localhost:80 nmk-finance
+```
+
+---
+
+## Database Backups
+
+A backup script is provided at `scripts/backup_db.sh`. On Linux, schedule it with cron:
+
+```bash
+chmod +x scripts/backup_db.sh
+# Run nightly at 2 AM
+crontab -e
+# Add: 0 2 * * * /path/to/nmk_finance/scripts/backup_db.sh
+```
+
+---
+
+## Project Structure
+
+```
+nmk_finance/
+├── config/           # Django project settings, URLs, WSGI/ASGI
+├── finance/          # Main app: models, views, admin, templatetags
+├── templates/        # HTML templates (Tailwind + HTMX)
+├── static/           # Static assets
+├── nginx/            # Nginx reverse proxy config
+├── scripts/          # Backup utilities
+├── Dockerfile        # Container build
+├── docker-compose.yml
+├── PLAN.md           # Detailed project plan
+└── requirements.txt
+```
+
+---
+
+## Key Features
+
+| Feature | Description |
+|---------|-------------|
+| **Dashboard** | Net balance, total contributions, total expenses at a glance |
+| **Categorized Income** | Contributions linked to categories (Zakat, Sadaqah, etc.) |
+| **Categorized Expenses** | Expenses with categories and free-text purpose field |
+| **Member Profiles** | Track who contributed what, with timestamps |
+| **Personal View** | Members log in to see their own contribution history |
+| **Admin Panel** | Full CRUD for treasurer via Django Admin |
+| **CSV Export** | Export contributions/expenses from the admin panel |
+| **HTMX Filtering** | Date filters update tables without full page reloads |
+| **Docker Ready** | One-command deployment with Docker Compose |
+
+---
+
+## License
+
+Private — NMK Community internal use.
