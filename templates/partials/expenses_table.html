@@ -29,7 +29,7 @@
 {% endif %}
 
 <!-- Fund Source Summary -->
-{% if by_fund_source %}
+{% if by_fund_source and user.is_staff %}
 <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
     <h2 class="text-lg font-semibold text-slate-800 mb-4">By Fund Source</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

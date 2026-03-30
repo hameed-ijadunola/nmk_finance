@@ -154,7 +154,6 @@ class Expense(models.Model):
         blank=True,
         related_name="recorded_expenses",
     )
-    receipt = models.FileField(upload_to="receipts/%Y/%m/", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -162,6 +161,29 @@ class Expense(models.Model):
 
     def __str__(self):
         return f"{self.category} — ${self.amount:,.2f} — {self.purpose[:50]}"
+
+
+class ExpenseReceipt(models.Model):
+    """One or more receipt files attached to a single expense."""
+
+    expense = models.ForeignKey(
+        Expense,
+        on_delete=models.CASCADE,
+        related_name="receipts",
+    )
+    file = models.FileField(
+        upload_to="receipts/%Y/%m/",
+        verbose_name="Receipt file",
+    )
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["uploaded_at"]
+        verbose_name = "Receipt"
+        verbose_name_plural = "Receipts"
+
+    def __str__(self):
+        return f"Receipt for {self.expense} ({self.file.name})"
 
 
 # ──────────────────────────────────────────────

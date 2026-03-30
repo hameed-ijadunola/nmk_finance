@@ -12,6 +12,7 @@ from .models import (
     DashboardSettings,
     Expense,
     ExpenseCategory,
+    ExpenseReceipt,
     Member,
 )
 
@@ -165,14 +166,14 @@ class ContributionAdmin(admin.ModelAdmin):
     date_hierarchy = "date"
     list_per_page = 30
     actions = [export_as_csv]
+    readonly_fields = ("recorded_by",)
 
     @admin.display(description="Amount")
     def formatted_amount(self, obj):
         return format_html("<strong>${}</strong>", f"{obj.amount:,.2f}")
 
     def save_model(self, request, obj, form, change):
-        if not change:
-            obj.recorded_by = request.user
+        obj.recorded_by = request.user
         super().save_model(request, obj, form, change)
 
     def changelist_view(self, request, extra_context=None):
@@ -188,9 +189,20 @@ class ContributionAdmin(admin.ModelAdmin):
 # ──────────────────────────────────────────────
 # Expense
 # ──────────────────────────────────────────────
+class ExpenseReceiptInline(admin.TabularInline):
+    """Allows attaching multiple receipt files to a single expense."""
+
+    model = ExpenseReceipt
+    extra = 1
+    fields = ("file",)
+    verbose_name = "Receipt"
+    verbose_name_plural = "Receipts"
+
+
 @admin.register(Expense)
 class ExpenseAdmin(admin.ModelAdmin):
     form = ExpenseAdminForm
+    inlines = [ExpenseReceiptInline]
     list_display = (
         "category",
         "fund_source",
@@ -205,6 +217,7 @@ class ExpenseAdmin(admin.ModelAdmin):
     list_per_page = 30
     actions = [export_as_csv]
     autocomplete_fields = ("contribution_category",)
+    readonly_fields = ("recorded_by",)
 
     @admin.display(description="Fund Source")
     def fund_source(self, obj):
@@ -224,8 +237,7 @@ class ExpenseAdmin(admin.ModelAdmin):
         return obj.purpose[:80] + "…" if len(obj.purpose) > 80 else obj.purpose
 
     def save_model(self, request, obj, form, change):
-        if not change:
-            obj.recorded_by = request.user
+        obj.recorded_by = request.user
         super().save_model(request, obj, form, change)
 
     def changelist_view(self, request, extra_context=None):
