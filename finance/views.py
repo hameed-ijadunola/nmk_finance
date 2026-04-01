@@ -81,7 +81,7 @@ def dashboard(request):
         "dash_settings": DashboardSettings.get_solo(),
     }
 
-    if request.htmx:
+    if getattr(request, "htmx", False):
         return render(request, "partials/summary_cards.html", context)
 
     return render(request, "dashboard.html", context)
@@ -130,7 +130,7 @@ def contributions_view(request):
         "dash_settings": DashboardSettings.get_solo(),
     }
 
-    if request.htmx:
+    if getattr(request, "htmx", False):
         return render(request, "partials/contributions_table.html", context)
 
     return render(request, "contributions.html", context)
@@ -188,7 +188,7 @@ def expenses_view(request):
         "dash_settings": DashboardSettings.get_solo(),
     }
 
-    if request.htmx:
+    if getattr(request, "htmx", False):
         return render(request, "partials/expenses_table.html", context)
 
     return render(request, "expenses.html", context)
@@ -231,7 +231,7 @@ def my_contributions(request):
         "date_to": date_to or "",
     }
 
-    if request.htmx:
+    if getattr(request, "htmx", False):
         return render(request, "partials/my_contributions_table.html", context)
 
     return render(request, "my_contributions.html", context)

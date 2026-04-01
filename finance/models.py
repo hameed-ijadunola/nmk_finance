@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.db.utils import DatabaseError
 
 
 # ──────────────────────────────────────────────
@@ -219,8 +220,18 @@ class DashboardSettings(models.Model):
 
     @classmethod
     def get_solo(cls):
-        obj, _ = cls.objects.get_or_create(pk=1)
-        return obj
+        """Return the singleton settings row.
+
+        In production (especially during first deploys), the database or the
+        underlying table might be temporarily unavailable. In those cases we
+        return an unsaved instance with defaults to avoid hard 500s.
+        """
+
+        try:
+            obj, _ = cls.objects.get_or_create(pk=1)
+            return obj
+        except DatabaseError:
+            return cls(pk=1)
 
     def __str__(self):
         return "Dashboard Settings"

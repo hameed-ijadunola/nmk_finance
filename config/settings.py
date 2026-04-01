@@ -160,3 +160,30 @@ CSRF_TRUSTED_ORIGINS = [
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 SITE_NAME = config("SITE_NAME", default="NMK Community Finance")
+
+# ──────────────────────────────────────────────
+# Logging (Heroku-friendly)
+# ──────────────────────────────────────────────
+DJANGO_LOG_LEVEL = config("DJANGO_LOG_LEVEL", default="INFO")
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+        },
+    },
+    "root": {
+        "handlers": ["console"],
+        "level": DJANGO_LOG_LEVEL,
+    },
+    "loggers": {
+        # Ensure request exceptions are always emitted.
+        "django.request": {
+            "handlers": ["console"],
+            "level": "ERROR",
+            "propagate": False,
+        },
+    },
+}

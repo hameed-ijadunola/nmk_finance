@@ -21,7 +21,9 @@ class Command(BaseCommand):
             )
             return
 
-        set_password = os.getenv("DJANGO_SUPERUSER_SET_PASSWORD", "").strip().lower() in (
+        set_password = os.getenv(
+            "DJANGO_SUPERUSER_SET_PASSWORD", ""
+        ).strip().lower() in (
             "1",
             "true",
             "yes",
@@ -43,7 +45,9 @@ class Command(BaseCommand):
             if email:
                 user.email = email
             user.save()
-            self.stdout.write(self.style.SUCCESS(f"ensure_superuser: created '{username}'"))
+            self.stdout.write(
+                self.style.SUCCESS(f"ensure_superuser: created '{username}'")
+            )
             return
 
         if not user.is_staff:
@@ -64,6 +68,8 @@ class Command(BaseCommand):
 
         if changed:
             user.save()
-            self.stdout.write(self.style.SUCCESS(f"ensure_superuser: updated '{username}'"))
+            self.stdout.write(
+                self.style.SUCCESS(f"ensure_superuser: updated '{username}'")
+            )
         else:
             self.stdout.write(f"ensure_superuser: ok ('{username}' already exists)")

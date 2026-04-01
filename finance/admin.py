@@ -2,6 +2,7 @@ import csv
 
 from django.contrib import admin
 from django.db.models import Sum
+from django.db.utils import DatabaseError
 from django.http import HttpResponse
 from django.utils.html import format_html
 
@@ -257,7 +258,10 @@ class DashboardSettingsAdmin(admin.ModelAdmin):
     """Singleton admin: the list view redirects straight to the one record."""
 
     def has_add_permission(self, request):
-        return not DashboardSettings.objects.exists()
+        try:
+            return not DashboardSettings.objects.exists()
+        except DatabaseError:
+            return True
 
     def has_delete_permission(self, request, obj=None):
         return False
