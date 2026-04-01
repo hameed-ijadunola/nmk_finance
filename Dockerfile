@@ -27,6 +27,10 @@ RUN python manage.py collectstatic --noinput
 # Create directory for SQLite database and media
 RUN mkdir -p /app/data /app/media
 
+# Entrypoint: apply migrations on startup
+RUN chmod +x /app/scripts/docker-entrypoint.sh
+ENTRYPOINT ["/app/scripts/docker-entrypoint.sh"]
+
 # Expose Gunicorn port
 EXPOSE 8000
 

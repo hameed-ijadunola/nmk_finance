@@ -65,6 +65,8 @@ Visit:
 - **Admin (Treasurer):** http://127.0.0.1:8000/admin/
 - **Member Login:** http://127.0.0.1:8000/accounts/login/
 
+Note: the Django development server is HTTP-only. If you see logs like `code 400, message Bad request version` and `You're accessing the development server over HTTPS`, your browser (or a proxy) is trying to use `https://...` against port `8000`. Use `http://127.0.0.1:8000/` (or try `http://localhost:8000/`), and if your browser keeps upgrading to HTTPS, open an incognito window or disable “always use secure connections” for localhost.
+
 ---
 
 ## Production Deployment (Docker)
@@ -74,6 +76,9 @@ Visit:
 ```bash
 docker compose up --build -d
 ```
+
+On container startup, the app automatically runs `python manage.py migrate` so the database schema is created/updated.
+The SQLite database is stored in the named Docker volume (`sqlite-data`) at `/app/data/db.sqlite3`.
 
 The app will be available on port **80** via Nginx.
 
