@@ -4,6 +4,7 @@ Django settings for NMK Community Finance project.
 
 from pathlib import Path
 
+import dj_database_url
 from decouple import Csv, config
 
 # ──────────────────────────────────────────────
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -68,16 +70,27 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 # ──────────────────────────────────────────────
-# Database — SQLite (single-file, easy backups)
+# Database — SQLite by default; Postgres when DATABASE_URL is set (e.g., Heroku)
 # ──────────────────────────────────────────────
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        # When running in Docker, docker-compose sets DATABASE_PATH=/app/data/db.sqlite3
-        # so the SQLite file lives on a named volume.
-        "NAME": config("DATABASE_PATH", default=str(BASE_DIR / "db.sqlite3")),
+DATABASE_URL = config("DATABASE_URL", default="")
+
+if DATABASE_URL:
+    DATABASES = {
+        "default": dj_database_url.parse(
+            DATABASE_URL,
+            conn_max_age=600,
+            ssl_require=not DEBUG,
+        )
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            # When running in Docker, docker-compose sets DATABASE_PATH=/app/data/db.sqlite3
+            # so the SQLite file lives on a named volume.
+            "NAME": config("DATABASE_PATH", default=str(BASE_DIR / "db.sqlite3")),
+        }
+    }
 
 # ──────────────────────────────────────────────
 # Auth
@@ -106,12 +119,40 @@ USE_TZ = True
 # ──────────────────────────────────────────────
 # Static & Media files
 # ──────────────────────────────────────────────
-STATIC_URL = "static/"
+STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-MEDIA_URL = "media/"
+MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
+
+WHITENOISE_MANIFEST_STRICT = config(
+    "WHITENOISE_MANIFEST_STRICT", default=False, cast=bool
+)
+
+# ──────────────────────────────────────────────
+# Reverse-proxy / HTTPS (Heroku-friendly defaults)
+# ──────────────────────────────────────────────
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+SECURE_SSL_REDIRECT = config("SECURE_SSL_REDIRECT", default=not DEBUG, cast=bool)
+SESSION_COOKIE_SECURE = config("SESSION_COOKIE_SECURE", default=not DEBUG, cast=bool)
+CSRF_COOKIE_SECURE = config("CSRF_COOKIE_SECURE", default=not DEBUG, cast=bool)
+
+_csrf_trusted_origins_raw = config("CSRF_TRUSTED_ORIGINS", default="")
+CSRF_TRUSTED_ORIGINS = [
+    origin.strip()
+    for origin in _csrf_trusted_origins_raw.split(",")
+    if origin.strip()
+]
 
 # ──────────────────────────────────────────────
 # Misc

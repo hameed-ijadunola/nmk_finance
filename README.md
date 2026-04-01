@@ -69,6 +69,49 @@ Note: the Django development server is HTTP-only. If you see logs like `code 400
 
 ---
 
+## Production Deployment (Heroku)
+
+This repo is set up to deploy cleanly on Heroku using the Python buildpack + Gunicorn.
+
+Key Heroku notes:
+- **Don’t use SQLite in production on Heroku** (dyno filesystem is ephemeral). Use **Heroku Postgres**.
+- **Uploaded media (receipts)** stored on the dyno filesystem will not be durable. For durable uploads, use object storage (e.g., S3) before relying on it for production.
+
+### 1) Create app + add Postgres
+
+```bash
+heroku login
+heroku create <your-app-name>
+heroku addons:create heroku-postgresql:essential-0 -a <your-app-name>
+```
+
+### 2) Set required config vars
+
+```bash
+heroku config:set \
+	SECRET_KEY="<generate-a-real-secret>" \
+	DEBUG=False \
+	ALLOWED_HOSTS="<your-app-name>.herokuapp.com" \
+	CSRF_TRUSTED_ORIGINS="https://<your-app-name>.herokuapp.com" \
+	-a <your-app-name>
+```
+
+### 3) Deploy
+
+```bash
+git push heroku main
+```
+
+This project includes a `Procfile` with a **release phase** that runs migrations automatically on deploy.
+
+### 4) Create an admin user
+
+```bash
+heroku run python manage.py createsuperuser -a <your-app-name>
+```
+
+---
+
 ## Production Deployment (Docker)
 
 ### Build and run
