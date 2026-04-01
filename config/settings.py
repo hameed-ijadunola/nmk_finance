@@ -149,9 +149,7 @@ CSRF_COOKIE_SECURE = config("CSRF_COOKIE_SECURE", default=not DEBUG, cast=bool)
 
 _csrf_trusted_origins_raw = config("CSRF_TRUSTED_ORIGINS", default="")
 CSRF_TRUSTED_ORIGINS = [
-    origin.strip()
-    for origin in _csrf_trusted_origins_raw.split(",")
-    if origin.strip()
+    origin.strip() for origin in _csrf_trusted_origins_raw.split(",") if origin.strip()
 ]
 
 # ──────────────────────────────────────────────

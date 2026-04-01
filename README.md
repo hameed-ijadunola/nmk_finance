@@ -73,6 +73,8 @@ Note: the Django development server is HTTP-only. If you see logs like `code 400
 
 This repo is set up to deploy cleanly on Heroku using the Python buildpack + Gunicorn.
 
+Note: this repo includes `runtime.txt` to pin the Python version used by Heroku. This prevents Heroku from automatically selecting a newer Python runtime that may not yet be compatible with the pinned Django version.
+
 Key Heroku notes:
 - **Don’t use SQLite in production on Heroku** (dyno filesystem is ephemeral). Use **Heroku Postgres**.
 - **Uploaded media (receipts)** stored on the dyno filesystem will not be durable. For durable uploads, use object storage (e.g., S3) before relying on it for production.
