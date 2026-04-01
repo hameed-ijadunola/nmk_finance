@@ -110,6 +110,20 @@ This project includes a `Procfile` with a **release phase** that runs migrations
 heroku run python manage.py createsuperuser -a <your-app-name>
 ```
 
+#### Optional: auto-create superuser on deploy (non-interactive)
+
+Heroku **does not** create a Django superuser automatically. If you can’t (or don’t want to) run the interactive `createsuperuser` prompt, this repo includes a release-phase command that will create/ensure a superuser when these config vars are set:
+
+- `DJANGO_SUPERUSER_USERNAME`
+- `DJANGO_SUPERUSER_EMAIL`
+- `DJANGO_SUPERUSER_PASSWORD`
+
+Set them in Heroku (Dashboard → Settings → Config Vars) and redeploy.
+
+Notes:
+- This requires a persistent database (i.e., **Heroku Postgres**). If you deploy without Postgres, Django falls back to SQLite and any user you create will not persist between dynos.
+- To rotate/reset the password for an existing user via deploy, also set `DJANGO_SUPERUSER_SET_PASSWORD=true` temporarily.
+
 ---
 
 ## Production Deployment (Docker)
