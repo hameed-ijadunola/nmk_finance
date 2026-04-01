@@ -13,7 +13,7 @@ from pathlib import Path
 from PIL import Image
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
-SOURCE = REPO_ROOT / "nmk_logo_sqr.png"
+SOURCE = REPO_ROOT / "nmk_logo.png"
 OUT_DIR = REPO_ROOT / "static" / "icons"
 
 PNG_SIZES: dict[str, int] = {
