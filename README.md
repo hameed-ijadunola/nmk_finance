@@ -69,6 +69,177 @@ Note: the Django development server is HTTP-only. If you see logs like `code 400
 
 ---
 
+## Using PostgreSQL Locally (Match Heroku)
+
+This project uses **SQLite by default** for local development, but will automatically use **PostgreSQL** whenever `DATABASE_URL` is set (same pattern as Heroku).
+
+### Option A: Run Postgres via Docker (recommended)
+
+```bash
+docker run --name nmk-postgres \
+	-e POSTGRES_PASSWORD=postgres \
+	-e POSTGRES_DB=nmk_finance \
+	-p 5432:5432 \
+	-d postgres:16
+```
+
+If port `5432` is already in use on your machine, use `5433` instead:
+
+```bash
+docker run --name nmk-postgres \
+	-e POSTGRES_PASSWORD=postgres \
+	-e POSTGRES_DB=nmk_finance \
+	-p 5433:5432 \
+	-d postgres:16
+```
+
+Then set in your `.env`:
+
+```bash
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/nmk_finance
+```
+
+(If you used `5433`, update the URL to `...@localhost:5433/...`.)
+
+Run migrations (this creates tables in Postgres):
+
+```bash
+python manage.py migrate
+```
+
+### Option B: Install Postgres locally
+
+- Install PostgreSQL (e.g., 15/16), ensure `psql` is available.
+- Create a database + user, then set `DATABASE_URL` in `.env` similarly.
+
+---
+
+## Move Existing SQLite Data → Local PostgreSQL
+
+Use this when you already have data in `db.sqlite3` and want it in local Postgres.
+
+### 1) Export a fixture from SQLite
+
+Make sure `DATABASE_URL` is **empty/unset** so Django uses SQLite.
+
+```bash
+python manage.py dumpdata \
+	--exclude contenttypes \
+	--exclude auth.permission \
+	--exclude admin.logentry \
+	--indent 2 \
+	> sqlite_dump.json
+```
+
+### 2) Point Django to Postgres and migrate schema
+
+Set `DATABASE_URL` in `.env` (example):
+
+```bash
+DATABASE_URL=postgresql://postgres:postgres@localhost:5432/nmk_finance
+```
+
+Then create tables in Postgres:
+
+```bash
+python manage.py migrate
+```
+
+### 3) Import the data into Postgres
+
+```bash
+python manage.py loaddata sqlite_dump.json
+```
+
+### 4) Quick sanity checks
+
+```bash
+python manage.py createsuperuser
+python manage.py runserver
+```
+
+Notes:
+- Uploaded files (e.g., receipt images) live under `media/` and are not stored in the database. Copy that folder as needed.
+- If you hit primary-key/sequence issues after importing, tell me the exact error and I’ll add the safest sequence reset for your tables.
+
+---
+
+## (Optional) Pull Heroku Postgres → Local Postgres
+
+If you want your local Postgres to match **production data** exactly, restore a Heroku backup into your local Postgres.
+
+```bash
+heroku pg:backups:capture -a <your-app-name>
+heroku pg:backups:download -a <your-app-name>
+```
+
+This downloads a backup file (usually `latest.dump`). Restore it into a local database (created ahead of time) with `pg_restore`:
+
+```bash
+pg_restore --no-owner --no-privileges --clean --if-exists \
+	--dbname=postgresql://postgres:postgres@localhost:5432/nmk_finance \
+	latest.dump
+```
+
+Then run:
+
+```bash
+python manage.py migrate
+```
+
+---
+
+## Push Local Postgres → Heroku Postgres (overwrite production)
+
+Use this if you want Heroku production to exactly match your local Postgres data.
+
+1) Back up production first:
+
+```bash
+heroku pg:backups:capture -a <your-app-name>
+```
+
+2) (Recommended) Enable maintenance mode to avoid writes during the operation:
+
+```bash
+heroku maintenance:on -a <your-app-name>
+```
+
+3) Push your local database into Heroku (this overwrites the Heroku DB):
+
+```bash
+heroku pg:push \
+	postgresql://postgres:postgres@localhost:5433/nmk_finance \
+	DATABASE_URL \
+	-a <your-app-name>
+```
+
+If your local Postgres is on port `5432`, use `...@localhost:5432/nmk_finance`.
+
+4) Turn maintenance mode off:
+
+```bash
+heroku maintenance:off -a <your-app-name>
+```
+
+---
+
+## Alternative: Load a Django fixture into Heroku
+
+This is useful for *initial seeding*, but it’s not a great “sync” mechanism if production already has data.
+
+High-level flow:
+- Put a fixture file in the repo (e.g., `finance/fixtures/sqlite_dump.json`), deploy it, then run:
+
+```bash
+heroku run python manage.py migrate -a <your-app-name>
+heroku run python manage.py loaddata sqlite_dump -a <your-app-name>
+```
+
+If you need a true “replace prod with my fixture” workflow, it’s usually safer to reset/push the database (section above) than to fight primary-key collisions.
+
+---
+
 ## Production Deployment (Heroku)
 
 This repo is set up to deploy cleanly on Heroku using the Python buildpack + Gunicorn.
@@ -95,6 +266,15 @@ heroku config:set \
 	DEBUG=False \
 	ALLOWED_HOSTS="<your-app-name>.herokuapp.com" \
 	CSRF_TRUSTED_ORIGINS="https://<your-app-name>.herokuapp.com" \
+	-a <your-app-name>
+```
+
+If you use a **custom domain** (e.g., `funds.nmkc.app`), you must include it too (otherwise Django returns **Bad Request (400)** due to `DisallowedHost`):
+
+```bash
+heroku config:set \
+	ALLOWED_HOSTS="<your-app-name>.herokuapp.com,funds.nmkc.app" \
+	CSRF_TRUSTED_ORIGINS="https://<your-app-name>.herokuapp.com,https://funds.nmkc.app" \
 	-a <your-app-name>
 ```
 

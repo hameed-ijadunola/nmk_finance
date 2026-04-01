@@ -1,0 +1,1256 @@
+[
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$Q1ZD8GnuGqUL6kOROTqQ15$x1t50Wdduz/bMsLFdysxxBjjQDEWh2wyLuxytwkyVgY=",
+    "last_login": "2026-03-27T23:00:48.534Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "admin@nmkcommunity.org",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-03-27T00:42:14.058Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$870000$8jiyHM6EFzAE4UOUtOLUQC$QezjIu7VCoEKcytTU8DKBItJutzVFPkuUBvF3vZTNn0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "testmember",
+    "first_name": "Abdullahi",
+    "last_name": "Yusuf",
+    "email": "abdullahi@example.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-03-27T00:42:19.614Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 6,
+  "fields": {
+    "full_name": "Abdullah Salau",
+    "email": "",
+    "phone": "+14435542973",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.747Z",
+    "updated_at": "2026-03-27T09:11:24.747Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 7,
+  "fields": {
+    "full_name": "Abdulmalik Oyedeji",
+    "email": "",
+    "phone": "+2348032130671",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.748Z",
+    "updated_at": "2026-03-27T09:11:24.748Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 8,
+  "fields": {
+    "full_name": "Ademed Hub",
+    "email": "",
+    "phone": "+2348066038712",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.749Z",
+    "updated_at": "2026-03-27T09:11:24.749Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 9,
+  "fields": {
+    "full_name": "Hameed Ijadunola",
+    "email": "",
+    "phone": "+18654066603",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.750Z",
+    "updated_at": "2026-03-27T09:11:24.750Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 10,
+  "fields": {
+    "full_name": "Taiwo Alabi",
+    "email": "",
+    "phone": "+2348084723888",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.750Z",
+    "updated_at": "2026-03-27T09:11:24.750Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 11,
+  "fields": {
+    "full_name": "Farouk Ajibade",
+    "email": "",
+    "phone": "+2347038942037",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.751Z",
+    "updated_at": "2026-03-27T09:11:24.751Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 12,
+  "fields": {
+    "full_name": "Bamis",
+    "email": "",
+    "phone": "+18653066185",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.752Z",
+    "updated_at": "2026-03-27T09:11:24.752Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 13,
+  "fields": {
+    "full_name": "Bisola Shukrah Olabiyi",
+    "email": "",
+    "phone": "+2347040173249",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.752Z",
+    "updated_at": "2026-03-27T09:11:24.752Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 14,
+  "fields": {
+    "full_name": "Abdulahi Badmus",
+    "email": "",
+    "phone": "+18652435183",
+    "is_active": true,
+    "user": [
+      "testmember"
+    ],
+    "created_at": "2026-03-27T09:11:24.753Z",
+    "updated_at": "2026-03-27T09:11:48.777Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 15,
+  "fields": {
+    "full_name": "DrTeeIce",
+    "email": "",
+    "phone": "+2348056212902",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.754Z",
+    "updated_at": "2026-03-27T09:11:24.754Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 16,
+  "fields": {
+    "full_name": "El-Myrath Oke",
+    "email": "",
+    "phone": "+19015247763",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.755Z",
+    "updated_at": "2026-03-27T09:11:24.755Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 17,
+  "fields": {
+    "full_name": "Maruf Lawal",
+    "email": "",
+    "phone": "+18659104535",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.756Z",
+    "updated_at": "2026-03-27T09:11:24.756Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 18,
+  "fields": {
+    "full_name": "F.Y",
+    "email": "",
+    "phone": "+18659642185",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.757Z",
+    "updated_at": "2026-03-27T09:11:24.757Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 19,
+  "fields": {
+    "full_name": "Faridah Bello",
+    "email": "",
+    "phone": "+18653007851",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.758Z",
+    "updated_at": "2026-03-27T09:11:24.758Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 20,
+  "fields": {
+    "full_name": "Habeeb Olajide",
+    "email": "",
+    "phone": "+2348073548840",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.758Z",
+    "updated_at": "2026-03-27T09:11:24.758Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 21,
+  "fields": {
+    "full_name": "Ibrahim Adediran",
+    "email": "",
+    "phone": "+18659788067",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.759Z",
+    "updated_at": "2026-03-27T09:11:24.759Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 22,
+  "fields": {
+    "full_name": "Mumeen Oduwole",
+    "email": "",
+    "phone": "+18652325060",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.760Z",
+    "updated_at": "2026-03-27T09:11:24.760Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 23,
+  "fields": {
+    "full_name": "Kk",
+    "email": "",
+    "phone": "+14235240163",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.761Z",
+    "updated_at": "2026-03-27T09:11:24.761Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 24,
+  "fields": {
+    "full_name": "Lateefah",
+    "email": "",
+    "phone": "+17134834656",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.762Z",
+    "updated_at": "2026-03-27T09:11:24.762Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 25,
+  "fields": {
+    "full_name": "Mckanaaki",
+    "email": "",
+    "phone": "+18657706095",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.762Z",
+    "updated_at": "2026-03-27T09:11:24.762Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 26,
+  "fields": {
+    "full_name": "Meenahfashionworld",
+    "email": "",
+    "phone": "+2348137583360",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.763Z",
+    "updated_at": "2026-03-27T09:11:24.763Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 27,
+  "fields": {
+    "full_name": "Muhammad Ajagbe",
+    "email": "",
+    "phone": "+2348141165219",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.764Z",
+    "updated_at": "2026-03-27T09:11:24.764Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 28,
+  "fields": {
+    "full_name": "Mustapha Abdulmojeed",
+    "email": "",
+    "phone": "+2348098020686",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.764Z",
+    "updated_at": "2026-03-27T09:11:24.764Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 29,
+  "fields": {
+    "full_name": "Nimat Ajide-Bamigboye",
+    "email": "",
+    "phone": "+2347038124504",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.765Z",
+    "updated_at": "2026-03-27T09:11:24.765Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 30,
+  "fields": {
+    "full_name": "Olubunmi Anifowose",
+    "email": "",
+    "phone": "+18652364076",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.765Z",
+    "updated_at": "2026-03-27T09:11:24.765Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 31,
+  "fields": {
+    "full_name": "Adiat Fakolujo",
+    "email": "",
+    "phone": "+2348076329600",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.766Z",
+    "updated_at": "2026-03-27T09:11:24.766Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 32,
+  "fields": {
+    "full_name": "Qudus Sarumi",
+    "email": "",
+    "phone": "+18659102071",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.766Z",
+    "updated_at": "2026-03-27T09:11:24.766Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 33,
+  "fields": {
+    "full_name": "Sadiq Shittu",
+    "email": "",
+    "phone": "+18652367456",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.767Z",
+    "updated_at": "2026-03-27T09:11:24.767Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 34,
+  "fields": {
+    "full_name": "Saheed Bello",
+    "email": "",
+    "phone": "+15053039092",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.768Z",
+    "updated_at": "2026-03-27T09:11:24.768Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 35,
+  "fields": {
+    "full_name": "Sulaimon Kasali",
+    "email": "",
+    "phone": "+15056171633",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.769Z",
+    "updated_at": "2026-03-27T09:11:24.769Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 36,
+  "fields": {
+    "full_name": "Tawakalitu Afolabi",
+    "email": "",
+    "phone": "+18659102606",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.769Z",
+    "updated_at": "2026-03-27T09:11:24.769Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 37,
+  "fields": {
+    "full_name": "Yewande Ojo",
+    "email": "",
+    "phone": "+18659101741",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.770Z",
+    "updated_at": "2026-03-27T09:11:24.770Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 38,
+  "fields": {
+    "full_name": "Yusuf Oladipupo",
+    "email": "",
+    "phone": "+2348029513490",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T09:11:24.770Z",
+    "updated_at": "2026-03-27T09:11:24.770Z"
+  }
+},
+{
+  "model": "finance.member",
+  "pk": 39,
+  "fields": {
+    "full_name": "Ummu AbdulRahman(MMM)",
+    "email": "",
+    "phone": "+18653862551",
+    "is_active": true,
+    "user": null,
+    "created_at": "2026-03-27T14:18:05.945Z",
+    "updated_at": "2026-03-27T14:18:42.734Z"
+  }
+},
+{
+  "model": "finance.contributioncategory",
+  "pk": 1,
+  "fields": {
+    "name": "1/28/2026 Abu Ahmad/Baby Ibrahim Funds",
+    "description": "Baby gift for Baby Ibrahim (9 Feb 2026)",
+    "is_active": true,
+    "show_on_dashboard": false,
+    "include_in_total": false,
+    "created_at": "2026-03-27T00:42:19.543Z"
+  }
+},
+{
+  "model": "finance.contributioncategory",
+  "pk": 2,
+  "fields": {
+    "name": "1447/2026 Ramadan Funds",
+    "description": "Ramadan contribution for 1447/2026",
+    "is_active": true,
+    "show_on_dashboard": true,
+    "include_in_total": true,
+    "created_at": "2026-03-27T00:42:19.550Z"
+  }
+},
+{
+  "model": "finance.contributioncategory",
+  "pk": 3,
+  "fields": {
+    "name": "2026/1447 General Fund",
+    "description": "Annual contribution for 2026/1447",
+    "is_active": true,
+    "show_on_dashboard": true,
+    "include_in_total": true,
+    "created_at": "2026-03-27T00:42:19.556Z"
+  }
+},
+{
+  "model": "finance.contributioncategory",
+  "pk": 4,
+  "fields": {
+    "name": "8/2025 Get Together Refund",
+    "description": "8/2025 Get Together Refund by the Brothers(7), excluding the new brother(2025)",
+    "is_active": true,
+    "show_on_dashboard": false,
+    "include_in_total": false,
+    "created_at": "2026-03-27T13:52:53.289Z"
+  }
+},
+{
+  "model": "finance.expensecategory",
+  "pk": 2,
+  "fields": {
+    "name": "1/28/2026 Abu Ahmad/Baby Ibrahim Cash Gift",
+    "description": "Cash gift to Abu Ahmad and Baby Ibrahim",
+    "is_active": true,
+    "show_on_dashboard": false,
+    "include_in_total": false,
+    "created_at": "2026-03-27T00:42:19.568Z"
+  }
+},
+{
+  "model": "finance.expensecategory",
+  "pk": 3,
+  "fields": {
+    "name": "1447/2026 Ramadan MCK Iftar",
+    "description": "Expenses for MCK Iftar sponsorship/contribution(Water, Dates, and To go boxes mainly)",
+    "is_active": true,
+    "show_on_dashboard": true,
+    "include_in_total": true,
+    "created_at": "2026-03-27T00:42:19.574Z"
+  }
+},
+{
+  "model": "finance.expensecategory",
+  "pk": 5,
+  "fields": {
+    "name": "8/2025 Get Together Refund",
+    "description": "8/2025 Get Together Refund",
+    "is_active": true,
+    "show_on_dashboard": false,
+    "include_in_total": false,
+    "created_at": "2026-03-27T14:49:02.948Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 31,
+  "fields": {
+    "member": 20,
+    "category": 3,
+    "amount": "50.00",
+    "date": "2025-09-30T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.172Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 32,
+  "fields": {
+    "member": 20,
+    "category": 2,
+    "amount": "150.00",
+    "date": "2026-02-08T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.175Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 33,
+  "fields": {
+    "member": 20,
+    "category": 4,
+    "amount": "27.00",
+    "date": "2025-09-30T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.176Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 34,
+  "fields": {
+    "member": 20,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-28T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.178Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 35,
+  "fields": {
+    "member": 19,
+    "category": 3,
+    "amount": "50.00",
+    "date": "2025-09-30T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.179Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 36,
+  "fields": {
+    "member": 17,
+    "category": 3,
+    "amount": "50.00",
+    "date": "2025-10-08T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.180Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 37,
+  "fields": {
+    "member": 17,
+    "category": 2,
+    "amount": "200.00",
+    "date": "2026-02-10T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.181Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 38,
+  "fields": {
+    "member": 17,
+    "category": 4,
+    "amount": "27.00",
+    "date": "2025-09-20T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.182Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 39,
+  "fields": {
+    "member": 17,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-29T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.182Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 40,
+  "fields": {
+    "member": 37,
+    "category": 3,
+    "amount": "50.00",
+    "date": "2025-10-25T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.184Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 41,
+  "fields": {
+    "member": 38,
+    "category": 3,
+    "amount": "50.00",
+    "date": "2025-11-25T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.186Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 42,
+  "fields": {
+    "member": 38,
+    "category": 2,
+    "amount": "80.00",
+    "date": "2026-02-08T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.187Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 43,
+  "fields": {
+    "member": 38,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-29T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.188Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 44,
+  "fields": {
+    "member": 39,
+    "category": 3,
+    "amount": "50.00",
+    "date": "2025-01-09T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.189Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 45,
+  "fields": {
+    "member": 35,
+    "category": 3,
+    "amount": "50.00",
+    "date": "2025-10-01T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.190Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 46,
+  "fields": {
+    "member": 35,
+    "category": 2,
+    "amount": "150.00",
+    "date": "2026-02-09T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.190Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 47,
+  "fields": {
+    "member": 35,
+    "category": 4,
+    "amount": "27.00",
+    "date": "2025-09-17T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.191Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 48,
+  "fields": {
+    "member": 35,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-30T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.191Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 49,
+  "fields": {
+    "member": 6,
+    "category": 3,
+    "amount": "50.00",
+    "date": "2025-09-20T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.193Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 50,
+  "fields": {
+    "member": 6,
+    "category": 2,
+    "amount": "150.00",
+    "date": "2026-02-09T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.193Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 51,
+  "fields": {
+    "member": 6,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-28T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.194Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 52,
+  "fields": {
+    "member": 34,
+    "category": 3,
+    "amount": "50.00",
+    "date": "2025-09-18T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.195Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 53,
+  "fields": {
+    "member": 34,
+    "category": 2,
+    "amount": "150.00",
+    "date": "2026-02-09T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.196Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 54,
+  "fields": {
+    "member": 34,
+    "category": 4,
+    "amount": "28.00",
+    "date": "2025-09-18T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.196Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 55,
+  "fields": {
+    "member": 34,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-30T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.197Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 56,
+  "fields": {
+    "member": 21,
+    "category": 3,
+    "amount": "50.00",
+    "date": "2025-09-17T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.198Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 57,
+  "fields": {
+    "member": 21,
+    "category": 4,
+    "amount": "27.00",
+    "date": "2025-09-17T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.198Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 58,
+  "fields": {
+    "member": 21,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-30T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.199Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 59,
+  "fields": {
+    "member": 22,
+    "category": 2,
+    "amount": "200.00",
+    "date": "2026-02-09T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.200Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 60,
+  "fields": {
+    "member": 22,
+    "category": 4,
+    "amount": "27.00",
+    "date": "2025-09-20T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.201Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 61,
+  "fields": {
+    "member": 22,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-29T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.202Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 62,
+  "fields": {
+    "member": 9,
+    "category": 3,
+    "amount": "50.00",
+    "date": "2025-09-17T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.203Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 63,
+  "fields": {
+    "member": 9,
+    "category": 2,
+    "amount": "150.00",
+    "date": "2026-02-08T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.204Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 64,
+  "fields": {
+    "member": 9,
+    "category": 4,
+    "amount": "6.00",
+    "date": "2025-09-17T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.205Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 65,
+  "fields": {
+    "member": 9,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-28T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.206Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 66,
+  "fields": {
+    "member": 36,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-30T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.207Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 67,
+  "fields": {
+    "member": 13,
+    "category": 2,
+    "amount": "150.00",
+    "date": "2026-02-14T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.208Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 68,
+  "fields": {
+    "member": 13,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-30T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.208Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 69,
+  "fields": {
+    "member": 28,
+    "category": 1,
+    "amount": "50.00",
+    "date": "2026-02-03T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.209Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 70,
+  "fields": {
+    "member": 7,
+    "category": 2,
+    "amount": "150.00",
+    "date": "2026-02-08T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.210Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 71,
+  "fields": {
+    "member": 7,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-30T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.211Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 72,
+  "fields": {
+    "member": 11,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-28T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.212Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 73,
+  "fields": {
+    "member": 10,
+    "category": 2,
+    "amount": "150.00",
+    "date": "2026-02-08T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.212Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 74,
+  "fields": {
+    "member": 10,
+    "category": 1,
+    "amount": "20.00",
+    "date": "2026-01-28T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.213Z"
+  }
+},
+{
+  "model": "finance.contribution",
+  "pk": 75,
+  "fields": {
+    "member": 14,
+    "category": 4,
+    "amount": "27.00",
+    "date": "2025-09-23T12:00:00Z",
+    "notes": "",
+    "recorded_by": null,
+    "created_at": "2026-03-27T14:32:03.214Z"
+  }
+},
+{
+  "model": "finance.expense",
+  "pk": 9,
+  "fields": {
+    "category": 2,
+    "contribution_category": 1,
+    "amount": "330.00",
+    "purpose": "Cash Gift for Baby Ibrahim",
+    "date": "2026-02-09T17:00:00Z",
+    "recorded_by": [
+      "admin"
+    ],
+    "created_at": "2026-03-27T15:02:37.241Z"
+  }
+},
+{
+  "model": "finance.expense",
+  "pk": 10,
+  "fields": {
+    "category": 3,
+    "contribution_category": 2,
+    "amount": "951.54",
+    "purpose": "8 OZ WATER\r\nItem 007874217010\r\nQty 25\r\n$224.50\r\n$8.98 each\r\n \r\nDEER PARK\r\nItem 008265750573\r\nQty 10\r\n$79.80\r\n$7.98 each\r\n\r\nORG DATES\r\nItem 009792300145\r\nQty 32\r\n$286.40\r\n$8.95 each\r\n\r\n8 OZ WATER\r\nItem 007874217010\r\nQty 30\r\n$269.40\r\n$8.98 each\r\n\r\nFuel - unlead\r\nItem: 658441\r\n15.069 gal\r\n$35.25\r\n$2.339/gal\r\n\r\nFuel - unlead\r\nItem: 658441\r\n1.041 gal\r\n$2.43\r\n$2.339/gal",
+    "date": "2026-02-12T17:00:00Z",
+    "recorded_by": [
+      "admin"
+    ],
+    "created_at": "2026-03-27T15:06:54.477Z"
+  }
+},
+{
+  "model": "finance.expense",
+  "pk": 11,
+  "fields": {
+    "category": 3,
+    "contribution_category": 2,
+    "amount": "392.86",
+    "purpose": "To Go Boxes (Hefty Supreme 3Hefty Supreme 3-Compartment 125 ct. x 20)",
+    "date": "2026-03-03T17:00:00Z",
+    "recorded_by": [
+      "admin"
+    ],
+    "created_at": "2026-03-27T15:10:58.769Z"
+  }
+},
+{
+  "model": "finance.expense",
+  "pk": 12,
+  "fields": {
+    "category": 5,
+    "contribution_category": 4,
+    "amount": "195.00",
+    "purpose": "Contributions/Refund(to Br. Sulaimon) for the refreshments",
+    "date": "2025-10-01T15:00:00Z",
+    "recorded_by": [
+      "admin"
+    ],
+    "created_at": "2026-03-27T15:15:25.141Z"
+  }
+},
+{
+  "model": "finance.expensereceipt",
+  "pk": 1,
+  "fields": {
+    "expense": 10,
+    "file": "receipts/2026/03/Screenshot_2026-03-28_184557.png",
+    "uploaded_at": "2026-03-28T23:03:58.953Z"
+  }
+},
+{
+  "model": "finance.expensereceipt",
+  "pk": 2,
+  "fields": {
+    "expense": 10,
+    "file": "receipts/2026/03/Screenshot_2026-03-28_184905.png",
+    "uploaded_at": "2026-03-28T23:03:58.956Z"
+  }
+},
+{
+  "model": "finance.expensereceipt",
+  "pk": 3,
+  "fields": {
+    "expense": 10,
+    "file": "receipts/2026/03/Screenshot_2026-03-28_185115.png",
+    "uploaded_at": "2026-03-28T23:03:58.958Z"
+  }
+},
+{
+  "model": "finance.expensereceipt",
+  "pk": 4,
+  "fields": {
+    "expense": 10,
+    "file": "receipts/2026/03/Screenshot_2026-03-28_185149.png",
+    "uploaded_at": "2026-03-28T23:03:58.959Z"
+  }
+},
+{
+  "model": "finance.dashboardsettings",
+  "pk": 1,
+  "fields": {
+    "show_summary_cards": true,
+    "show_recent_contributions": false,
+    "show_recent_expenses": true
+  }
+}
+]
