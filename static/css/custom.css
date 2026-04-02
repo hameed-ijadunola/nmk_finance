@@ -35,9 +35,12 @@ tbody tr {
 /* Better horizontal scrolling on touch devices (tables) */
 .overflow-x-auto {
     overflow-x: auto;
+    /* Avoid trapping vertical scroll gestures while still clipping any vertical overflow. */
     overflow-y: hidden;
+    overflow-y: clip;
     -webkit-overflow-scrolling: touch;
-    touch-action: pan-x;
+    /* Allow vertical panning to scroll the page when the pointer is over the table. */
+    touch-action: pan-x pan-y;
 }
 
 /* Print-friendly: hide nav and footer */
