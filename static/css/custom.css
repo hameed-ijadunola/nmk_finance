@@ -6,6 +6,13 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Prevent page-wide horizontal overflow on mobile */
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 /* HTMX loading indicator */
 .htmx-request .htmx-indicator {
     display: inline-block;
