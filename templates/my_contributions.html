@@ -31,7 +31,7 @@
 <!-- Date Filter -->
 <form hx-get="{% url 'finance:htmx_my_contributions' %}" hx-target="#my-contributions-content" hx-swap="innerHTML"
     class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 mb-6">
-    <div class="flex flex-col sm:flex-row items-end gap-4">
+    <div class="flex flex-col sm:flex-row items-end items-stretch sm:items-end gap-4">
         <div class="flex-1">
             <label for="date-from" class="block text-sm font-medium text-slate-600 mb-1">From</label>
             <input type="date" id="date-from" name="from" value="{{ date_from }}"
@@ -53,7 +53,7 @@
     </div>
 </form>
 
-<div id="my-contributions-content">
+<div id="my-contributions-content" class="grid grid-cols-1 gap-8 mt-8">
     {% include "partials/my_contributions_table.html" %}
 </div>
 
