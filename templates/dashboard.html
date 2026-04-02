@@ -91,7 +91,7 @@
 <!-- Category Breakdowns -->
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
     <!-- Contributions by Category -->
-    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
         <h2 class="text-lg font-semibold text-slate-800 mb-4">
             <span class="inline-block w-3 h-3 bg-emerald-500 rounded-full mr-2"></span>
             Contributions
@@ -99,14 +99,14 @@
         {% if income_by_category %}
         <div class="space-y-3">
             {% for item in income_by_category %}
-            <div class="flex items-center justify-between">
-                <span class="text-slate-600 text-sm">{{ item.category__name }}</span>
-                <div class="flex items-center space-x-3">
-                    <div class="w-32 bg-slate-100 rounded-full h-2.5">
+            <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+                <span class="text-slate-600 text-sm break-words sm:truncate sm:max-w-xs">{{ item.category__name }}</span>
+                <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <div class="flex-1 sm:flex-none sm:w-32 bg-slate-100 rounded-full h-2.5">
                         <div class="bg-emerald-500 h-2.5 rounded-full"
                             style="width: {% widthratio item.total total_income 100 %}%"></div>
                     </div>
-                    <span class="text-sm font-medium text-slate-800 w-28 text-right">{{ item.total|usd }}</span>
+                    <span class="text-sm font-medium text-slate-800 shrink-0 w-24 sm:w-28 text-right whitespace-nowrap">{{ item.total|usd }}</span>
                 </div>
             </div>
             {% endfor %}
@@ -117,7 +117,7 @@
     </div>
 
     <!-- Expenses by Category -->
-    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6">
         <h2 class="text-lg font-semibold text-slate-800 mb-4">
             <span class="inline-block w-3 h-3 bg-red-500 rounded-full mr-2"></span>
             Expenses
@@ -125,14 +125,14 @@
         {% if expense_by_category %}
         <div class="space-y-3">
             {% for item in expense_by_category %}
-            <div class="flex items-center justify-between">
-                <span class="text-slate-600 text-sm">{{ item.category__name }}</span>
-                <div class="flex items-center space-x-3">
-                    <div class="w-32 bg-slate-100 rounded-full h-2.5">
+            <div class="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
+                <span class="text-slate-600 text-sm break-words sm:truncate sm:max-w-xs">{{ item.category__name }}</span>
+                <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <div class="flex-1 sm:flex-none sm:w-32 bg-slate-100 rounded-full h-2.5">
                         <div class="bg-red-500 h-2.5 rounded-full"
                             style="width: {% widthratio item.total total_expenses 100 %}%"></div>
                     </div>
-                    <span class="text-sm font-medium text-slate-800 w-28 text-right">{{ item.total|usd }}</span>
+                    <span class="text-sm font-medium text-slate-800 shrink-0 w-24 sm:w-28 text-right whitespace-nowrap">{{ item.total|usd }}</span>
                 </div>
             </div>
             {% endfor %}
