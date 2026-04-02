@@ -6,11 +6,16 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Prevent page-wide horizontal overflow on mobile */
+/* Safer sizing defaults (prevents w-full + padding overflow) */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 html,
 body {
     max-width: 100%;
-    overflow-x: hidden;
 }
 
 /* HTMX loading indicator */
@@ -29,7 +34,10 @@ tbody tr {
 
 /* Better horizontal scrolling on touch devices (tables) */
 .overflow-x-auto {
+    overflow-x: auto;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
+    touch-action: pan-x;
 }
 
 /* Print-friendly: hide nav and footer */

@@ -6,7 +6,7 @@
     <h2 class="text-lg font-semibold text-slate-800 mb-4">By Expense Category</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {% for item in by_category %}
-        <div class="flex items-center justify-between gap-3 rounded-lg p-3
+        <div class="min-w-0 flex items-center justify-between gap-3 rounded-lg p-3
             {% if user.is_staff and not item.category__show_on_dashboard %}bg-slate-100 opacity-60
             {% elif user.is_staff and not item.category__include_in_total %}bg-red-50 opacity-60
             {% else %}bg-red-50{% endif %}">
@@ -34,7 +34,7 @@
     <h2 class="text-lg font-semibold text-slate-800 mb-4">By Fund Source</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {% for item in by_fund_source %}
-        <div class="flex items-center justify-between gap-3 bg-sky-50 rounded-lg p-3">
+        <div class="min-w-0 flex items-center justify-between gap-3 bg-sky-50 rounded-lg p-3">
             <span class="min-w-0 text-sm font-medium text-slate-700 truncate">{{ item.contribution_category__name }}</span>
             <span class="shrink-0 whitespace-nowrap text-sm font-bold text-sky-700">{{ item.total|usd }}</span>
         </div>
