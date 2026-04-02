@@ -20,6 +20,11 @@ tbody tr {
     transition: background-color 0.15s ease;
 }
 
+/* Better horizontal scrolling on touch devices (tables) */
+.overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+}
+
 /* Print-friendly: hide nav and footer */
 @media print {
     nav, footer, form {

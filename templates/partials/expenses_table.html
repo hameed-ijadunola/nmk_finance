@@ -2,16 +2,16 @@
 
 <!-- Category Summary -->
 {% if by_category %}
-<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-6">
     <h2 class="text-lg font-semibold text-slate-800 mb-4">By Expense Category</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {% for item in by_category %}
-        <div class="flex items-center justify-between rounded-lg p-3
+        <div class="flex items-center justify-between gap-3 rounded-lg p-3
             {% if user.is_staff and not item.category__show_on_dashboard %}bg-slate-100 opacity-60
             {% elif user.is_staff and not item.category__include_in_total %}bg-red-50 opacity-60
             {% else %}bg-red-50{% endif %}">
-            <div class="flex items-center gap-1.5">
-                <span class="text-sm font-medium text-slate-700">{{ item.category__name }}</span>
+            <div class="min-w-0 flex items-center gap-1.5">
+                <span class="min-w-0 text-sm font-medium text-slate-700 truncate">{{ item.category__name }}</span>
                 {% if user.is_staff %}
                 {% if not item.category__show_on_dashboard %}
                 <span class="text-xs bg-amber-100 text-amber-700 px-1.5 py-0.5 rounded-full">🚫</span>
@@ -21,7 +21,7 @@
                 {% endif %}
                 {% endif %}
             </div>
-            <span class="text-sm font-bold text-red-700">{{ item.total|usd }}</span>
+            <span class="shrink-0 whitespace-nowrap text-sm font-bold text-red-700">{{ item.total|usd }}</span>
         </div>
         {% endfor %}
     </div>
@@ -30,13 +30,13 @@
 
 <!-- Fund Source Summary -->
 {% if by_fund_source and user.is_staff %}
-<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 mb-6">
+<div class="bg-white rounded-xl shadow-sm border border-slate-200 p-4 sm:p-6 mb-6">
     <h2 class="text-lg font-semibold text-slate-800 mb-4">By Fund Source</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         {% for item in by_fund_source %}
-        <div class="flex items-center justify-between bg-sky-50 rounded-lg p-3">
-            <span class="text-sm font-medium text-slate-700">{{ item.contribution_category__name }}</span>
-            <span class="text-sm font-bold text-sky-700">{{ item.total|usd }}</span>
+        <div class="flex items-center justify-between gap-3 bg-sky-50 rounded-lg p-3">
+            <span class="min-w-0 text-sm font-medium text-slate-700 truncate">{{ item.contribution_category__name }}</span>
+            <span class="shrink-0 whitespace-nowrap text-sm font-bold text-sky-700">{{ item.total|usd }}</span>
         </div>
         {% endfor %}
     </div>
@@ -52,11 +52,11 @@
                 <tr>
                     <th class="text-left py-3 px-4 text-slate-600 font-semibold">Date</th>
                     <th class="text-left py-3 px-4 text-slate-600 font-semibold">Category</th>
-                    <th class="text-left py-3 px-4 text-slate-600 font-semibold">Fund Source</th>
+                    <th class="hidden md:table-cell text-left py-3 px-4 text-slate-600 font-semibold">Fund Source</th>
                     <th class="text-left py-3 px-4 text-slate-600 font-semibold">Purpose</th>
                     <th class="text-right py-3 px-4 text-slate-600 font-semibold">Amount</th>
                     {% if user.is_staff %}
-                    <th class="text-left py-3 px-4 text-slate-600 font-semibold">Flags</th>
+                    <th class="hidden lg:table-cell text-left py-3 px-4 text-slate-600 font-semibold">Flags</th>
                     {% endif %}
                 </tr>
             </thead>
@@ -65,14 +65,41 @@
                 <tr class="hover:bg-slate-50 transition
                     {% if user.is_staff and not e.category.show_on_dashboard %}opacity-50 bg-slate-50
                     {% elif not e.category.include_in_total %}opacity-60{% endif %}">
-                    <td class="py-3 px-4 text-slate-500">{{ e.date|date:"M d, Y H:i" }}</td>
+                    <td class="py-3 px-4 text-slate-500 whitespace-nowrap">
+                        <span class="sm:hidden">{{ e.date|date:"M d" }}</span>
+                        <span class="hidden sm:inline">{{ e.date|date:"M d, Y H:i" }}</span>
+                    </td>
                     <td class="py-3 px-4">
                         <span
                             class="inline-block bg-red-100 text-red-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
                             {{ e.category.name }}
                         </span>
+                        {% if e.contribution_category %}
+                        <div class="md:hidden mt-1">
+                            <span
+                                class="inline-block bg-sky-100 text-sky-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                {{ e.contribution_category.name }}
+                            </span>
+                        </div>
+                        {% endif %}
+                        {% if user.is_staff %}
+                        <div class="lg:hidden mt-1 flex flex-wrap gap-1">
+                            {% if not e.category.show_on_dashboard %}
+                            <span class="inline-block bg-amber-100 text-amber-700 text-[11px] font-medium px-2 py-0.5 rounded-full"
+                                title="Category hidden from dashboard">
+                                🚫
+                            </span>
+                            {% endif %}
+                            {% if not e.category.include_in_total %}
+                            <span class="inline-block bg-red-100 text-red-600 text-[11px] font-medium px-2 py-0.5 rounded-full"
+                                title="Category excluded from total">
+                                ∅
+                            </span>
+                            {% endif %}
+                        </div>
+                        {% endif %}
                     </td>
-                    <td class="py-3 px-4">
+                    <td class="hidden md:table-cell py-3 px-4">
                         {% if e.contribution_category %}
                         <span
                             class="inline-block bg-sky-100 text-sky-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
@@ -82,10 +109,15 @@
                         <span class="text-slate-400 text-xs">—</span>
                         {% endif %}
                     </td>
-                    <td class="py-3 px-4 text-slate-600">{{ e.purpose|truncatewords:12 }}</td>
+                    <td class="py-3 px-4 text-slate-600">
+                        <div class="max-w-[14rem] sm:max-w-none truncate">
+                            <span class="sm:hidden">{{ e.purpose|truncatewords:6 }}</span>
+                            <span class="hidden sm:inline">{{ e.purpose|truncatewords:12 }}</span>
+                        </div>
+                    </td>
                     <td class="py-3 px-4 text-right font-semibold text-red-600">{{ e.amount|usd }}</td>
                     {% if user.is_staff %}
-                    <td class="py-3 px-4">
+                    <td class="hidden lg:table-cell py-3 px-4">
                         <div class="flex flex-wrap gap-1">
                             {% if not e.category.show_on_dashboard %}
                             <span
