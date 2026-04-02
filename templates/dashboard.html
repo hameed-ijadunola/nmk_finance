@@ -5,13 +5,15 @@
 
 {% block content %}
 
-{% if user.is_staff %}
+{% if user.is_authenticated and user.is_staff %}
+{% if user.is_superuser or perms.finance.add_contribution or perms.finance.add_expense or perms.finance.add_member or perms.finance.view_member or perms.finance.change_member or perms.finance.view_contribution or perms.finance.change_contribution or perms.finance.view_expense or perms.finance.change_expense %}
 <!-- Treasurer Quick Links -->
 <div class="bg-brand-700 rounded-xl p-5 mb-8 shadow-md">
     <h2 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">
         ⚙️ Treasurer Admin Panel
     </h2>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+        {% if user.is_superuser or perms.finance.add_member or perms.finance.view_member or perms.finance.change_member %}
         <a href="/admin/finance/member/"
             class="flex flex-col items-center bg-white/10 hover:bg-white/20 text-white rounded-lg p-3 transition text-center">
             <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -20,6 +22,9 @@
             </svg>
             <span class="text-xs font-medium">Members</span>
         </a>
+        {% endif %}
+
+        {% if user.is_superuser or perms.finance.add_contribution %}
         <a href="/admin/finance/contribution/add/"
             class="flex flex-col items-center bg-white/10 hover:bg-white/20 text-white rounded-lg p-3 transition text-center">
             <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -27,6 +32,9 @@
             </svg>
             <span class="text-xs font-medium">Log Contribution</span>
         </a>
+        {% endif %}
+
+        {% if user.is_superuser or perms.finance.add_expense %}
         <a href="/admin/finance/expense/add/"
             class="flex flex-col items-center bg-white/10 hover:bg-white/20 text-white rounded-lg p-3 transition text-center">
             <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,6 +43,9 @@
             </svg>
             <span class="text-xs font-medium">Log Expense</span>
         </a>
+        {% endif %}
+
+        {% if user.is_superuser or perms.finance.view_contribution or perms.finance.change_contribution %}
         <a href="/admin/finance/contribution/"
             class="flex flex-col items-center bg-white/10 hover:bg-white/20 text-white rounded-lg p-3 transition text-center">
             <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -43,6 +54,9 @@
             </svg>
             <span class="text-xs font-medium">All Contributions</span>
         </a>
+        {% endif %}
+
+        {% if user.is_superuser or perms.finance.view_expense or perms.finance.change_expense %}
         <a href="/admin/finance/expense/"
             class="flex flex-col items-center bg-white/10 hover:bg-white/20 text-white rounded-lg p-3 transition text-center">
             <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -51,8 +65,10 @@
             </svg>
             <span class="text-xs font-medium">All Expenses</span>
         </a>
+        {% endif %}
     </div>
 </div>
+{% endif %}
 {% endif %}
 
 <!-- Summary Cards -->
