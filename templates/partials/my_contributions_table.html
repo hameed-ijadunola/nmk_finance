@@ -2,28 +2,34 @@
 
 <div class="bg-white rounded-xl shadow-sm border border-slate-200 overflow-hidden">
     {% if contributions %}
-    <div class="overflow-x-auto">
+    <div class="overflow-x-auto w-full max-w-full">
         <table class="w-full text-sm">
             <thead class="bg-slate-50 border-b border-slate-200">
                 <tr>
                     <th class="text-left py-3 px-4 text-slate-600 font-semibold">Date</th>
                     <th class="text-left py-3 px-4 text-slate-600 font-semibold">Category</th>
                     <th class="text-right py-3 px-4 text-slate-600 font-semibold">Amount</th>
-                    <th class="text-left py-3 px-4 text-slate-600 font-semibold">Notes</th>
+                    <th class="hidden md:table-cell text-left py-3 px-4 text-slate-600 font-semibold">Notes</th>
                 </tr>
             </thead>
             <tbody class="divide-y divide-slate-100">
                 {% for c in contributions %}
                 <tr class="hover:bg-slate-50 transition">
-                    <td class="py-3 px-4 text-slate-500">{{ c.date|date:"M d, Y H:i" }}</td>
+                    <td class="py-3 px-4 text-slate-500 whitespace-nowrap">
+                        <span class="sm:hidden">{{ c.date|date:"M d" }}</span>
+                        <span class="hidden sm:inline">{{ c.date|date:"M d, Y H:i" }}</span>
+                    </td>
                     <td class="py-3 px-4">
                         <span
                             class="inline-block bg-emerald-100 text-emerald-700 text-xs font-medium px-2.5 py-0.5 rounded-full">
                             {{ c.category.name }}
                         </span>
+                        <div class="md:hidden mt-1 text-xs text-slate-500 truncate max-w-[14rem]">
+                            {{ c.notes|default:"—" }}
+                        </div>
                     </td>
                     <td class="py-3 px-4 text-right font-semibold text-emerald-600">{{ c.amount|usd }}</td>
-                    <td class="py-3 px-4 text-slate-500">{{ c.notes|default:"—" }}</td>
+                    <td class="hidden md:table-cell py-3 px-4 text-slate-500 truncate max-w-[240px]">{{ c.notes|default:"—" }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
@@ -31,7 +37,7 @@
                 <tr>
                     <td colspan="2" class="py-3 px-4 font-semibold text-slate-700">Total</td>
                     <td class="py-3 px-4 text-right font-bold text-emerald-700">{{ grand_total|usd }}</td>
-                    <td></td>
+                    <td class="hidden md:table-cell"></td>
                 </tr>
             </tfoot>
         </table>

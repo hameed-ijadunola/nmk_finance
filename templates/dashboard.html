@@ -167,7 +167,7 @@
                 class="text-brand-600 hover:text-brand-700 text-sm font-medium">View all →</a>
         </div>
         {% if recent_contributions %}
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto w-full max-w-full">
             <table class="w-full text-sm">
                 <thead>
                     <tr class="border-b border-slate-100">
@@ -179,8 +179,12 @@
                 <tbody>
                     {% for c in recent_contributions %}
                     <tr class="border-b border-slate-50 hover:bg-slate-50">
-                        <td class="py-2.5">{{ c.member.full_name }}</td>
-                        <td class="py-2.5 text-slate-500">{{ c.category.name }}</td>
+                        <td class="py-2.5">
+                            <div class="truncate max-w-[12rem] sm:max-w-none">{{ c.member.full_name }}</div>
+                        </td>
+                        <td class="py-2.5 text-slate-500">
+                            <div class="truncate max-w-[10rem] sm:max-w-none">{{ c.category.name }}</div>
+                        </td>
                         <td class="py-2.5 text-right font-medium text-emerald-600">{{ c.amount|usd }}</td>
                     </tr>
                     {% endfor %}
@@ -215,7 +219,7 @@
                 all →</a>
         </div>
         {% if recent_expenses %}
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto w-full max-w-full">
             <table class="w-full text-sm">
                 <thead>
                     <tr class="border-b border-slate-100">
